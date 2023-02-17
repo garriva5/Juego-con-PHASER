@@ -1,0 +1,90 @@
+:root{
+    --oscuro: #000000;
+    --blanco: #ffffff;
+    --morado: #9932CC;
+}
+
+html{
+    color: red ;
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body{
+    background-color: var(--oscuro);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+header{
+    text-align: right;
+    padding: 1rem 1rem;
+}
+
+
+/*-------------------------inputs-----------------*/
+.sing-in{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+  }
+
+  .sing-in input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: .5rem;
+  }
+  
+
+  /*-----------------------Todos los Botones------------*/
+.boton, .footer{
+    background-color: rgb(255, 0, 0);
+    color: var(--blanco); /* EL PADDING ES PARA PONER COMO UN MARGEN O SEPARACION EN TODAS LAS DIRECCIOES*/ 
+    font-size: 1.3rem;
+    border-radius: 5px;
+    padding: 5px;
+}
+.boton:hover{
+    background-color: rgba(255, 0, 0, 0.462);
+}
+
+.primerosbotones, .Botonesparaguardar, .botonactualizar  {
+    display: grid;
+    grid-template-columns: 50% 48%;
+    column-gap: .5rem; 
+    justify-content: center;
+}
+
+.botonesGandF,  .botonesborrar{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    margin-top: .5rem;
+    row-gap: .5rem; 
+}
+    
+.hide{
+    display: none;
+}
+
+.tabla1{
+    text-align: center;
+    margin-top: 2rem;
+}
+
+
+#map { 
+ position: absolute; 
+ top: 0; 
+ bottom: 0; 
+ width: 100%; }
+
+
+.footer{
+    position: absolute;
+    bottom: .5rem;
+    margin-left: 1rem;
+}

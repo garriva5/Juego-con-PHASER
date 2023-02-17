@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autenticacion</title>
+    <link rel="preload" href="../css styles/index.css" as="style">
+    <link href="../css styles/index.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/360b0549be.js" crossorigin="anonymous"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css"rel="stylesheet"/>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
+
+</head>
+    
+<header id="header"></header>
+
+<body>
+    <!-- ------------------mapbox---------------- -->
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css"/>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.css" type="text/css">
+
+
+    <main>
+            <div class="sing-in" id="inicio">
+                    <h1>Autenticacion de cuentas</h1>
+                    <p>Ingresa tu correo electronico y una contraseña</p>
+                    
+                    <label> Email</label>
+                    <input type="email" id="email" value="" placeholder="******@*****.com">
+                    <br>
+                    <label> Password </label>
+                    <input  type="password" id="pass" value="" placeholder="******** ">            
+                    <br>
+               
+                <div class="primerosbotones">
+                    <button id ="crear" class="boton">Crear</button>
+                    <button id = "log" class="boton" >Sing in</button>
+                </div>
+
+
+                <div class="botonesGandF">
+                    <button id = "google" class="boton" type="image"><i class="fa-brands fa-google-plus"></i> Google</button>
+                    <button id = "facebook" class="boton" type="image"><i class="fa-brands fa-facebook"></i> Facebook</button>
+                    <button id = "twitter" class="boton" type="image"><i class="fa-brands fa-twitter"></i> Twitter</button>
+                    <button id = "github" class="boton" type="image"><i class="fa-brands fa-github"></i> GitHub</button>
+                </div>
+                
+
+            </div>
+
+            <div id ='ocultar' class="hide">
+                <div class="sing-in">  
+
+                        <h2> Ingrese los datos correspondientes </h2>
+                        <label> Nombres </label>
+                        <input type="text" id="nom" value="" placeholder="Nombre Completo">
+                        <br>
+                        <label> Apellidos </label>
+                        <input  type="text" id="apell" value="" placeholder="Apellidos">            
+                        <br>
+                        <label> Edad </label>
+                        <input  type="number" id="edad" value="" placeholder=" Edad 18"> 
+
+                    <div class="Botonesparaguardar">
+                        <button id = "Guardar" class="boton" >Guardar</button>
+                        <button id = "cerrar" class="boton" >Cerrar sesion</button>
+                    </div>
+                        <br>
+                        
+                    <div class="botonactualizar">
+                        <input type="text" id="id-ac" placeholder="ID unico" >
+                        <input type="text" id="nombre-ac" placeholder="Nombre ">
+                        <input type="text" id="apellido-ac" placeholder="Apellidos ">
+                        <input type="number" id="edad-ac" placeholder="Edad ">
+                        <button id = "BuscarAct" class="boton" > Buscar Datos </button>
+                        <button id = "actualizar" class="boton" > Actualizar datos </button>
+                    </div>
+
+                    <div class="botonesborrar">
+                        <button id = "borrar" class="boton" > Borrar datos </button>
+                        <button id = "mostrarmap" class="boton" > Mostrar mapa </button>
+                    </div>
+
+                    <div class="tabla1">
+                        <table id="tabla"> Datos </table>
+                        <button id = "leer" class="boton" > Mostrar datos </button>
+
+                    </div>
+               
+
+
+
+                </div> 
+            </div>
+           
+                            <!-- input para id vacio -->
+                            <div id="map" class="hide"></div>
+
+
+        <input  type="" id="id" value="" disabled class="hide" >
+    </main>
+
+    <footer class="footer">
+         <button id = "cerrarmapa" class="boton hide" > Cerrar mapa </button>
+    </footer>
+   
+    <script type="module" src="../js/CDN.js"></script>
+
+</body>
+</html>
