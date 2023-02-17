@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:700");
+
 :root{
     --oscuro: #000000;
     --blanco: #ffffff;
@@ -5,22 +7,30 @@
 }
 
 html{
-    color: red ;
+    background-image: url(/fondo\ 3.png);
+    font-family: "Roboto Mono", monospace;
+    color: bisque;
     box-sizing: border-box;
+
 }
 *, *:before, *:after {
     box-sizing: inherit;
 }
 
-body{
-    background-color: var(--oscuro);
-    font-family: Georgia, 'Times New Roman', Times, serif;
-}
 
 header{
     text-align: right;
     padding: 1rem 1rem;
 }
+
+h1{
+    text-align: center;
+}
+
+.h1{
+    color: bisque;
+}
+
 
 
 /*-------------------------inputs-----------------*/
@@ -37,19 +47,44 @@ header{
     padding: 10px;
     margin-bottom: 10px;
     border-radius: .5rem;
+    background-color: rgb(255, 228, 196, .9);
+  }
+
+  .logcuentas, .playyet{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  select{
+    font-size: 1rem;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: .5rem;
+    background-color: rgb(255, 228, 196, .9);
   }
   
 
   /*-----------------------Todos los Botones------------*/
 .boton, .footer{
-    background-color: rgb(255, 0, 0);
+    background-color: rgba(0, 0, 0, 0.8);
     color: var(--blanco); /* EL PADDING ES PARA PONER COMO UN MARGEN O SEPARACION EN TODAS LAS DIRECCIOES*/ 
     font-size: 1.3rem;
     border-radius: 5px;
     padding: 5px;
 }
+
+.boton-o{
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--blanco); /* EL PADDING ES PARA PONER COMO UN MARGEN O SEPARACION EN TODAS LAS DIRECCIOES*/ 
+    font-size: 1.3rem;
+    border-radius: 5px;
+    padding: 20px;
+}
 .boton:hover{
-    background-color: rgba(255, 0, 0, 0.462);
+    background-color: rgba(255, 228, 196, 0.430);
 }
 
 .primerosbotones, .Botonesparaguardar, .botonactualizar  {
@@ -59,11 +94,19 @@ header{
     justify-content: center;
 }
 
-.botonesGandF,  .botonesborrar{
+.botonesborrar{
     display: grid;
     grid-template-rows: 1fr 1fr;
     margin-top: .5rem;
     row-gap: .5rem; 
+}
+
+.botonesGandF{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 1rem; 
+    column-gap: 1rem;
+
 }
     
 .hide{
@@ -78,9 +121,10 @@ header{
 
 #map { 
  position: absolute; 
- top: 0; 
- bottom: 0; 
- width: 100%; }
+ top: 10rem; 
+ bottom: 10rem; 
+ left: 10rem;
+ width: 50%; }
 
 
 .footer{

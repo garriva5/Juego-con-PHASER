@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autenticacion</title>
+    <title>Examen Phaser</title>
     <link rel="preload" href="/index.css" as="style">
     <link href="/index.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/360b0549be.js" crossorigin="anonymous"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css"rel="stylesheet"/>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
 
 </head>
     
@@ -25,7 +26,7 @@
 
     <main>
             <div class="sing-in" id="inicio">
-                    <h1>Autenticacion de cuentas</h1>
+                    <h1>Registrate</h1>
                     <p>Ingresa tu correo electronico y una contraseña</p>
                     
                     <label> Email</label>
@@ -36,65 +37,70 @@
                     <br>
                
                 <div class="primerosbotones">
-                    <button id ="crear" class="boton">Crear</button>
+                    <button id ="crear" class="boton">log in</button>
                     <button id = "log" class="boton" >Sing in</button>
                 </div>
 
-
-                <div class="botonesGandF">
-                    <button id = "google" class="boton" type="image"><i class="fa-brands fa-google-plus"></i> Google</button>
-                    <button id = "facebook" class="boton" type="image"><i class="fa-brands fa-facebook"></i> Facebook</button>
-                    <button id = "twitter" class="boton" type="image"><i class="fa-brands fa-twitter"></i> Twitter</button>
-                    <button id = "github" class="boton" type="image"><i class="fa-brands fa-github"></i> GitHub</button>
-                </div>
-                
-
+                    <a href="#" class="h1" id="registros" >Inicia Sesion con</a>
             </div>
+
+            <section class="logcuentas">
+                <div class="botonesGandF hide" id="cuentas">
+                    <button id = "google" class="boton-o" type="image"><i class="fa-brands fa-google-plus"></i> Google</button>
+                    <button id = "facebook" class="boton-o" type="image"><i class="fa-brands fa-facebook"></i> Facebook</button>
+                    <button id = "twitter" class="boton-o" type="image"><i class="fa-brands fa-twitter"></i> Twitter</button>
+                    <button id = "github" class="boton-o" type="image"><i class="fa-brands fa-github"></i> GitHub</button>
+                </div>
+            </section>
+           
+
 
             <div id ='ocultar' class="hide">
                 <div class="sing-in">  
 
-                        <h2> Ingrese los datos correspondientes </h2>
-                        <label> Nombres </label>
-                        <input type="text" id="nom" value="" placeholder="Nombre Completo">
+                        <h2> Ingresa tu Nickname y los datos </h2>
+                        <label> Nickname </label>
+                        <input type="text" id="nom" value="" placeholder="Manolito_manos _pajeras33">
                         <br>
-                        <label> Apellidos </label>
-                        <input  type="text" id="apell" value="" placeholder="Apellidos">            
+                        <select class="" id="region">
+                            <option selected >Selecciona tu localidad </option>
+                            <option value="-103.40956,25.54223">Torreon.Coah.</option>
+                            <option value="-103.50168,25.56781">Gomez Palacio. DGO</option>
+                            <option value="-103.52701,25.53583">Lerdo</option>
+                        </select>
                         <br>
-                        <label> Edad </label>
-                        <input  type="number" id="edad" value="" placeholder=" Edad 18"> 
 
-                    <div class="Botonesparaguardar">
-                        <button id = "Guardar" class="boton" >Guardar</button>
-                        <button id = "cerrar" class="boton" >Cerrar sesion</button>
-                    </div>
+                        <div class="Botonesparaguardar">
+                            <button id = "Guardar" class="boton" >Guardar</button>
+                            <button id = "cerrar" class="boton" >Cerrar sesion</button>
+                        </div>
                         <br>
-                        
-                    <div class="botonactualizar">
-                        <input type="text" id="id-ac" placeholder="ID unico" >
-                        <input type="text" id="nombre-ac" placeholder="Nombre ">
-                        <input type="text" id="apellido-ac" placeholder="Apellidos ">
-                        <input type="number" id="edad-ac" placeholder="Edad ">
-                        <button id = "BuscarAct" class="boton" > Buscar Datos </button>
-                        <button id = "actualizar" class="boton" > Actualizar datos </button>
-                    </div>
-
-                    <div class="botonesborrar">
-                        <button id = "borrar" class="boton" > Borrar datos </button>
-                        <button id = "mostrarmap" class="boton" > Mostrar mapa </button>
-                    </div>
-
-                    <div class="tabla1">
-                        <table id="tabla"> Datos </table>
-                        <button id = "leer" class="boton" > Mostrar datos </button>
-
-                    </div>
-               
-
-
-
+                            
+                        <div class="botonesborrar">
+                            <button id = "borrar" class="boton" > Borrar datos </button>
+                            <button id = "play" class="boton" > <--Comenzar --> </button>
+                                
+                        </div>
                 </div> 
             </div>
+
+            <section class="playyet hide" id="1">
+                <h2>¿Estas listo ?</h2>
+                <div class="botonesborrar" >
+                    <button id = "jugar" class="boton" > Comienza a jugar </button>
+                    <button id = "mostrarmap" class="boton" > Mostrar mapa </button>
+                    <button id = "back" class="boton" > Regresar </button>
+                </div>
+    
+                <div class="tabla1 ">
+                    <button id = "leer" class="boton" > Mostrar datos </button>
+                    <br>
+                    <table id="tabla"> Datos y puntuacion de los jugadores  </table>
+                    
+    
+                </div>
+            </section>
+           
            
                             <!-- input para id vacio -->
                             <div id="map" class="hide"></div>
@@ -111,3 +117,16 @@
 
 </body>
 </html>
+
+
+
+
+
+
+    <!-- <div class="botonactualizar">
+                        <input type="text" id="id-ac" placeholder="ID unico" >
+                        <input type="text" id="nombre-ac" placeholder="Nickname">
+                        <input type="text" id="apellido-ac" placeholder="Localidad">
+                        <button id = "BuscarAct" class="boton" > Buscar Datos </button>
+                        <button id = "actualizar" class="boton" > Actualizar datos </button>
+                    </div> -->
