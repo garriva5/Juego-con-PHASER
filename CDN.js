@@ -589,3 +589,4 @@ juego.addEventListener("click", function () {
     a.classList.add("hide");
     playgame();
 });
+
