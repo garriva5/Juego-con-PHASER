@@ -251,8 +251,6 @@ const github = document.getElementById("github");
 //CRUD------------
 //creat---------
 const nombre = document.getElementById("nom");
-const apellido = document.getElementById("apell");
-const edad = document.getElementById("edad");
 const crear = document.getElementById("crear");
 const guardar = document.getElementById("Guardar");
 const cerrar = document.getElementById("cerrar");
@@ -260,13 +258,6 @@ const cerrar = document.getElementById("cerrar");
 const leer = document.getElementById("leer");
 const tabla = document.getElementById("tabla");
 const inputId = document.getElementById("id");
-//update--------
-const actualizar = document.getElementById("actualizar");
-const buscarAct = document.getElementById("BuscarAct");
-const inputActid = document.getElementById("id-ac");
-const inputActname = document.getElementById("nombre-ac");
-const inputActlast = document.getElementById("apellido-ac");
-const inputActedad = document.getElementById("edad-ac");
 //delete borrar--------
 const borrar = document.getElementById("borrar");
 
@@ -444,6 +435,8 @@ onAuthStateChanged(auth, (user) => {
         header.innerHTML = user.email;
         div.classList.add("hide");
         divOcultar.classList.remove("hide");
+        cuentasocultas.classList.add("hide");
+
 
         // ...
     } else {
