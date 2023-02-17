@@ -27,19 +27,19 @@ function playgame() {
         width: 860,
         height: 1100,
         physics: {
-            default: 'arcade',
+            default: "arcade",
             arcade: {
-                gravity: { y: 600 },
-                debug: false
-            }
+                gravity: { y: 300 },
+                debug: false,
+            },
         },
         scene: {
             preload: preload,
             create: create,
-            update: update
-        }
+            update: update,
+        },
     };
-    
+
     var player;
     var stars;
     var bombs;
@@ -48,172 +48,177 @@ function playgame() {
     var score = 0;
     var gameOver = false;
     var scoreText;
-    
+
     var game = new Phaser.Game(config);
-    
-    function preload ()
-    {
-        this.load.image('sky', 'assets/fondog.png');
-        this.load.image('ground', 'assets/pisoa.png');
-        this.load.image('star', 'assets/emi-2.png');
-        this.load.image('bomb', 'assets/bomb.png');
-        this.load.spritesheet('dude', 'assets/mono.png', { frameWidth: 32, frameHeight: 48 });
+
+    function preload() {
+        this.load.image("sky", "assets/fondog.png");
+        this.load.image("ground", "assets/pisoa.png");
+        this.load.image("star", "assets/emi-2.png");
+        this.load.image("bomb", "assets/bomb.png");
+        this.load.spritesheet("dude", "assets/mono.png", {
+            frameWidth: 32,
+            frameHeight: 48,
+        });
     }
-    
-    function create ()
-    {
+
+    function create() {
         //  A simple background for our game
-        this.add.image(400, 300, 'sky').setScale(.9);
-    
+        this.add.image(400, 300, "sky").setScale(0.9);
+
         //  The platforms group contains the ground and the 2 ledges we can jump on
         platforms = this.physics.add.staticGroup();
-    
+
         //  Here we create the ground.
         //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-        platforms.create(100, 700, 'ground').setScale(50, .5).refreshBody();
-    
-        //  Now let's create some ledges
-        platforms.create(700, 650, 'ground');
-        platforms.create(260, 550, 'ground');
-        platforms.create(500, 600, 'ground');
-        platforms.create(60, 500, 'ground');
-        platforms.create(260, 450, 'ground');
-        platforms.create(550, 700, 'ground');
-        platforms.create(670, 330, 'ground');
-        platforms.create(400, 100, 'ground');
-        platforms.create(500, 400, 'ground');
-        
+        platforms.create(100, 700, "ground").setScale(50, 0.5).refreshBody();
 
-    
+        //  Now let's create some ledges
+        platforms.create(700, 650, "ground");
+        platforms.create(260, 550, "ground");
+        platforms.create(500, 600, "ground");
+        platforms.create(60, 500, "ground");
+        platforms.create(260, 450, "ground");
+        platforms.create(550, 700, "ground");
+        platforms.create(670, 330, "ground");
+        platforms.create(400, 100, "ground");
+        platforms.create(500, 400, "ground");
+
         // The player and its settings
-        player = this.physics.add.sprite(100, 450, 'dude');
-    
+        player = this.physics.add.sprite(100, 450, "dude");
+
         //  Player physics properties. Give the little guy a slight bounce.
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
-    
+
         //  Our player animations, turning, walking left and walking right.
         this.anims.create({
-            key: 'left',
-            frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+            key: "left",
+            frames: this.anims.generateFrameNumbers("dude", {
+                start: 0,
+                end: 3,
+            }),
             frameRate: 10,
-            repeat: -1
+            repeat: -1,
         });
-    
+
         this.anims.create({
-            key: 'turn',
-            frames: [ { key: 'dude', frame: 4 } ],
-            frameRate: 20
+            key: "turn",
+            frames: [{ key: "dude", frame: 4 }],
+            frameRate: 20,
         });
-    
+
         this.anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+            key: "right",
+            frames: this.anims.generateFrameNumbers("dude", {
+                start: 5,
+                end: 8,
+            }),
             frameRate: 10,
-            repeat: -1
+            repeat: -1,
         });
-    
+
         //  Input Events
         cursors = this.input.keyboard.createCursorKeys();
-    
+
         //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
-        stars = this.physics.add.group({
-            key: 'star',
-            setXY: { x: 100, y: 50, stepX: 1000 }
+        stars = this.physics.add.staticGroup({
+            key: "star",
+            repeat: 1,
+            setXY: {
+                x: Phaser.Math.Between(100, 900),
+                y: Phaser.Math.Between(50, 500),
+                stepX: Phaser.Math.Between(50, 100),
+                stepY: Phaser.Math.Between(50, 100),
+            },
         });
-    
+
         stars.children.iterate(function (child) {
-    
             //  Give each star a slightly different bounce
             child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-    
         });
-    
+
         bombs = this.physics.add.group();
-    
+
         //  The score
-        scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-    
+        scoreText = this.add.text(16, 16, "score: 0", {
+            fontSize: "32px",
+            fill: "#000",
+        });
+
         //  Collide the player and the stars with the platforms
         this.physics.add.collider(player, platforms);
         this.physics.add.collider(stars, platforms);
         this.physics.add.collider(bombs, platforms);
-    
+
         //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
         this.physics.add.overlap(player, stars, collectStar, null, this);
-    
+
         this.physics.add.collider(player, bombs, hitBomb, null, this);
     }
-    
-    function update ()
-    {
-        if (gameOver)
-        {
+
+    function update() {
+        if (gameOver) {
             return;
         }
-    
-        if (cursors.left.isDown)
-        {
+
+        if (cursors.left.isDown) {
             player.setVelocityX(-160);
-    
-            player.anims.play('left', true);
-        }
-        else if (cursors.right.isDown)
-        {
+
+            player.anims.play("left", true);
+        } else if (cursors.right.isDown) {
             player.setVelocityX(160);
-    
-            player.anims.play('right', true);
-        }
-        else
-        {
+
+            player.anims.play("right", true);
+        } else {
             player.setVelocityX(0);
-    
-            player.anims.play('turn');
+
+            player.anims.play("turn");
         }
-    
-        if (cursors.up.isDown && player.body.touching.down)
-        {
+
+        if (cursors.up.isDown && player.body.touching.down) {
             player.setVelocityY(-330);
         }
     }
-    
-    function collectStar (player, star)
-    {
+
+    function collectStar(player, star) {
         star.disableBody(true, true);
-    
+
         //  Add and update the score
         score += 10;
-        scoreText.setText('Score: ' + score);
-    
-        if (stars.countActive(true) === 0)
-        {
+        scoreText.setText("Score: " + score);
+
+        if (stars.countActive(true) === 0) {
             //  A new batch of stars to collect
             stars.children.iterate(function (child) {
-    
                 child.enableBody(true, child.x, 0, true, true);
-    
             });
-    
-            var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-    
-            var bomb = bombs.create(x, 16, 'bomb');
+
+            var x =
+                player.x < 400
+                    ? Phaser.Math.Between(400, 800)
+                    : Phaser.Math.Between(0, 400);
+
+            var bomb = bombs.create(x, 16, "bomb");
             bomb.setBounce(1);
             bomb.setCollideWorldBounds(true);
             bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
             bomb.allowGravity = false;
-    
         }
     }
-    
-    function hitBomb (player, bomb)
-    {
+
+    function hitBomb(player, bomb) {
         this.physics.pause();
-    
+
         player.setTint(0xff0000);
-    
-        player.anims.play('turn');
-    
+
+        player.anims.play("turn");
+
         gameOver = true;
+
+        game.destroy(true, false);
+
+        a.classList.remove("hide");
     }
 }
 
@@ -312,11 +317,9 @@ log.addEventListener("click", function () {
         });
 });
 
-registros.addEventListener('click', function ( ) {
+registros.addEventListener("click", function () {
     cuentasocultas.classList.remove("hide");
     div.classList.add("hide");
-    
-
 });
 
 cerrar.addEventListener("click", function () {
@@ -437,7 +440,6 @@ onAuthStateChanged(auth, (user) => {
         divOcultar.classList.remove("hide");
         cuentasocultas.classList.add("hide");
 
-
         // ...
     } else {
         console.log("no user");
@@ -447,13 +449,13 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-
 // --------------------CRUD------------------------
 guardar.addEventListener("click", async () => {
     try {
         await setDoc(doc(db, "users", nombre.value), {
             Nombre: nombre.value,
             Region: region.value,
+            Score: score.value,
         });
         alert(`Tu Nickname ${nombre.value} se ha creado correctamente!`);
     } catch (error) {
@@ -464,10 +466,10 @@ guardar.addEventListener("click", async () => {
 
 leer.addEventListener("click", async () => {
     tabla.innerHTML = `<tr>
-        <td> |---Id---| </td>
-        <td> |---Nickname---| </td>
-        <td> |---Region---| </td>
-        <td> |---Score---| </td>
+        <td> |--Id--| </td>
+        <td> |--Nickname--| </td>
+        <td> |--Region--| </td>
+        <td> |--Score--| </td>
     </tr>`;
 
     const querySnapshot = await getDocs(collection(db, "users"));
@@ -477,24 +479,25 @@ leer.addEventListener("click", async () => {
             <td>${doc.id}</td>
             <td>${doc.data().Nombre}</td>
             <td>${doc.data().Region}</td>
+            <td>${doc.data().Score}</td>
         </tr>`;
     });
 });
 
-play.addEventListener('click', function(){
+play.addEventListener("click", function () {
     a.classList.remove("hide");
-    divOcultar.classList.add("hide")
+    divOcultar.classList.add("hide");
 });
 
-regresar.addEventListener('click', function(){
+regresar.addEventListener("click", function () {
     a.classList.add("hide");
-    divOcultar.classList.remove("hide")
+    divOcultar.classList.remove("hide");
 });
 
 borrar.addEventListener("click", async () => {
     await deleteDoc(doc(db, "users", nombre.value));
 
-    alert("Se ha borrado el usuario "  +  nombre.value  + ' junto con sus datos');
+    alert("Se ha borrado el usuario " + nombre.value + " junto con sus datos");
 });
 
 //-----------------mapbox-----------------
@@ -507,10 +510,18 @@ const map = new mapboxgl.Map({
     center: [-103.50784, 25.59504], // starting position [lng, lat]
     zoom: 10, // starting zoom
 });
-
-const marker1 = new mapboxgl.Marker()
-    .setLngLat([-103.50784, 25.59504])
-    .addTo(map);
+// Initialize the geolocate control.
+const geolocate = new mapboxgl.GeolocateControl({
+    positionOptions: {
+    enableHighAccuracy: true
+    },
+    trackUserLocation: true
+    });
+    // Add the control to the map.
+    map.addControl(geolocate);
+    map.on('load', () => {
+    geolocate.trigger();
+    });
 
 map.addControl(
     new MapboxDirections({
@@ -518,12 +529,52 @@ map.addControl(
     })
 );
 
+map.on("load", () => {
+    // Load an image from an external URL.
+    map.loadImage(
+        "https://cdn-icons-png.flaticon.com/512/94/94105.png",
+        (error, image) => {
+            if (error) throw error;
+
+            // Add the image to the map style.
+            map.addImage("cat", image);
+
+            // Add a data source containing one point feature.
+            map.addSource("point", {
+                type: "geojson",
+                data: {
+                    type: "FeatureCollection",
+                    features: [
+                        {
+                            type: "Feature",
+                            geometry: {
+                                type: "Point",
+                                coordinates: [-103.43354,25.57780],
+                            },
+                        },
+                    ],
+                },
+            });
+
+            // Add a layer to use the image to represent the data.
+            map.addLayer({
+                id: "points",
+                type: "symbol",
+                source: "point", // reference the data source
+                layout: {
+                    "icon-image": "cat", // reference the image
+                    "icon-size": 0.25,
+                },
+            });
+        }
+    );
+});
+
 showmap.addEventListener("click", function () {
     mapa.classList.remove("hide");
     showmap.classList.add("hide");
     cerrarmapa.classList.remove("hide");
     a.classList.add("hide");
-    
 });
 
 cerrarmapa.addEventListener("click", function () {
@@ -536,10 +587,5 @@ cerrarmapa.addEventListener("click", function () {
 // -----------------------phaser------------
 juego.addEventListener("click", function () {
     a.classList.add("hide");
-    playgame ()
+    playgame();
 });
-
-
-
-
-

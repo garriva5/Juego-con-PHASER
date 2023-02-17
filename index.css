@@ -41,7 +41,7 @@ h1{
 
   }
 
-  .sing-in input {
+  .sing-in input, .chema {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -62,7 +62,7 @@ h1{
     padding: 10px;
     margin-bottom: 10px;
     border-radius: .5rem;
-    background-color: rgb(255, 228, 196, .9);
+    background-color: #ffe4c4e6;
   }
   
 
@@ -119,11 +119,12 @@ h1{
 
 
 #map { 
- position: absolute; 
- top: 10rem; 
- bottom: 10rem; 
- left: 10rem;
- width: 50%; }
+        position: absolute; 
+        top: 0; 
+        bottom: 0;
+        right: 0;
+        width: 100%; 
+}
 
 
 .footer{
