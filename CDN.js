@@ -541,6 +541,7 @@ cerrarmapa.addEventListener("click", function () {
 });
 
 
+
 // -----------------------phaser------------
 juego.addEventListener("click", function () {
     a.classList.add("hide");
